@@ -51,8 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function jump() {
+    clearInterval(downTimeId);
     upTimerId = setInterval(function () {
       doodlerBottomSpace += 20;
+      doodler.style.bottom = doodlerBottomSpace + "px";
+      if (doodlerBottomSpace > 350) {
+        fall();
+      }
+    }, 30);
+  }
+
+  function fall() {
+    clearInterval(upTimerId);
+    downTimeId = setInterval(function () {
+      doodlerBottomSpace -= 5;
       doodler.style.bottom = doodlerBottomSpace + "px";
     }, 30);
   }
