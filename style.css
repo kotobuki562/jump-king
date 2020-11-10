@@ -11,14 +11,14 @@
   text-align: center;
 }
 .doodler{
-  width: 60px;
+  width: 70px;
   height: 85px;
   background-image: url('superhero.png');
   position: absolute;
 }
 .platform{
   width: 85px;
-  height: 15px;
+  height: 25px;
   background-image: url('loading.png');
   position: absolute;
 }
