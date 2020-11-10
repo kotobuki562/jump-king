@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function movePlatforms() {
     if (doodlerBottomSpace > 200) {
       platforms.forEach((platform) => {
-        platform.bottom -= 4;
+        platform.bottom -= 5;
         let visual = platform.visual;
         visual.style.bottom = platform.bottom + "px";
       });
@@ -105,17 +105,37 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowLeft") {
       moveLeft();
     } else if (e.key === "ArrowRight") {
-      //move right
+      moveLeft();
     } else if (e.key === "ArrowUp") {
       // moveStraight
     }
   }
 
   function moveLeft() {
+    if (isGoingRight) {
+      clearInterval(rightTimerId);
+      isGoingRight = false;
+    }
     isGoingLeft = true;
     leftTimerId = setInterval(function () {
-      doodlerLeftSpacee -= 5;
-      doodler.style.left = doodlerLeftSpacee + "px";
+      if (doodlerLeftSpacee >= 0) {
+        doodlerLeftSpacee -= 5;
+        doodler.style.left = doodlerLeftSpacee + "px";
+      } else moveRight();
+    }, 30);
+  }
+
+  function moveRight() {
+    if (isGoingLeft) {
+      clearInterval(leftTimerId);
+      isGoingLeft = false;
+    }
+    isGoingRight = true;
+    rightTimerId = setInterval(function () {
+      if (doodlerLeftSpacee <= 340) {
+        doodlerLeftSpacee += 5;
+        doodler.style.left = doodlerLeftSpacee + "px";
+      } else moveLeft();
     }, 30);
   }
 
